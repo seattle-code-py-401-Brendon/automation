@@ -1,5 +1,5 @@
 import pytest
-from automation import get_emails, get_phone_numbers
+from main import get_emails, get_phone_numbers
 
 
 # @pytest.mark.skip('get email')
