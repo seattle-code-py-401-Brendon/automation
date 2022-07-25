@@ -10,9 +10,9 @@ def test_get_email():
     assert actual == expected
 
 
-@pytest.mark.skip('get phone number')
+# @pytest.mark.skip('get phone number')
 def test_get_phone_number():
-    text = 'hello my 088-92-9985Turkey'
+    text = 'phone.text'
     actual = get_phone_numbers(text)
-    expected = '088-92-9985'
-    assert actual == expected
+    expected = '088-927-9985'
+    assert actual[0] == expected
