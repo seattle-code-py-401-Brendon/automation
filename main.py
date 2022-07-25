@@ -10,6 +10,7 @@ def get_emails(file):
      """
     try:
         file_stringified = ''
+        all_emails = []
         with open(file) as f:
             read_file = f.readlines()
         for text in read_file:
@@ -17,11 +18,17 @@ def get_emails(file):
         # find all the emails
         emails = re.findall(r'[\w\.-]+@[\w\.-]+', file_stringified)
         # set email count so we know how many we have
-        email_count = 0
+
         for email in emails:
+            all_emails.append(email)
+        emails_file = open(r'assets/emails.text', 'w')
+        email_count = 0
+        for new_contact in all_emails:
             email_count += 1
-            # print(f'({email_count})Email: {email}')
-        return email
+            emails_file.write(f'{email_count} Email: {new_contact}' + '\n')
+        phone_numbers_file.close()
+
+        return all_emails
     except:
         raise Exception
 
@@ -36,15 +43,19 @@ def get_phone_numbers(file):
         for text in read_file:
             file_stringified += text
         #     find all phone numbers with a xxx-xxx-xxxx format
-        # phone_numbers = re.findall("\w{3}-\w{3}-\w{4}", file_stringified)
         phone_numbers = re.findall("[0-9-]+[0-9-]+[0-9-]", file_stringified)
-        # [^0-9]+([0-9.]+)
-        phone_number_count = 0
+
         for number in phone_numbers:
             if 8 < len(number) < 15:
-                phone_number_count += 1
                 all_phone_numbers.append(number)
-                print(f'{phone_number_count} Phone#: {number}')
+        # write to the email  file
+        phone_numbers_file = open(r'assets/phone_numbers.text', 'w')
+        phone_number_count = 0
+        for number in all_phone_numbers:
+            phone_number_count += 1
+            phone_numbers_file.write(f'{phone_number_count} Phone#: {number}' + '\n')
+        phone_numbers_file.close()
+
         return all_phone_numbers
 
 
@@ -54,5 +65,6 @@ def get_phone_numbers(file):
 
 if __name__ == "__main__":
     text_file = 'assets/potential-contacts.text'
-    get_emails(text_file)
+    print(get_emails(text_file))
     print(get_phone_numbers(text_file))
+
