@@ -26,7 +26,7 @@ def get_emails(file):
         for new_contact in all_emails:
             email_count += 1
             emails_file.write(f'{email_count} Email: {new_contact}' + '\n')
-        phone_numbers_file.close()
+        emails_file.close()
 
         return all_emails
     except:
