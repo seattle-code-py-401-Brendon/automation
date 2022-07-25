@@ -8,23 +8,20 @@ def get_emails(file):
     """[Function]: Parses out file for emails and sets number.
        [Params]: file - takes in a file location
      """
-    try:
-        file_stringified = ''
-        with open(file) as f:
-            read_file = f.readlines()
-        for text in read_file:
-            file_stringified += text
-        # find all the emails
-        emails = re.findall(r'[\w\.-]+@[\w\.-]+', file_stringified)
-        # set email count so we know how many we have
-        email_count = 0
-        for email in emails:
-            email_count += 1
-            print(f'({email_count})Email: {email}')
-        return file_stringified
+    file_stringified = ''
+    with open(file) as f:
+        read_file = f.readlines()
+    for text in read_file:
+        file_stringified += text
+    # find all the emails
+    emails = re.findall(r'[\w\.-]+@[\w\.-]+', file_stringified)
+    # set email count so we know how many we have
+    email_count = 0
+    for email in emails:
+        email_count += 1
+        print(f'({email_count})Email: {email}')
+    return email
 
-    except:
-        raise Exception
 
 #     create function to get phone numbers
 def get_phone_numbers(file):
