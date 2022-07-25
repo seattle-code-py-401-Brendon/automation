@@ -36,12 +36,15 @@ def get_phone_numbers(file):
         for text in read_file:
             file_stringified += text
         #     find all phone numbers with a xxx-xxx-xxxx format
-        phone_numbers = re.findall("\w{3}-\w{3}-\w{4}", file_stringified)
+        # phone_numbers = re.findall("\w{3}-\w{3}-\w{4}", file_stringified)
+        phone_numbers = re.findall("[0-9-]+[0-9-]+[0-9-]", file_stringified)
+        # [^0-9]+([0-9.]+)
         phone_number_count = 0
         for number in phone_numbers:
-            phone_number_count += 1
-            all_phone_numbers.append(number)
-            # print(f'{phone_number_count} Phone#: {number}')
+            if 8 < len(number) < 15:
+                phone_number_count += 1
+                all_phone_numbers.append(number)
+                print(f'{phone_number_count} Phone#: {number}')
         return all_phone_numbers
 
 
@@ -52,4 +55,4 @@ def get_phone_numbers(file):
 if __name__ == "__main__":
     text_file = 'assets/potential-contacts.text'
     get_emails(text_file)
-    get_phone_numbers(text_file)
+    print(get_phone_numbers(text_file))
